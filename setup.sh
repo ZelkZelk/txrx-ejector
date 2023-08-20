@@ -54,7 +54,7 @@ then
         | sed "s/txrx/$project/g"                                      \
         | tr '\n' '\r'                                                  \
         | sed "s/node_clean:/node_clean:\r\trm -rf backend\/dist backend\/node_modules frontend\/dist frontend\/node_modules\r\tcd backend \&\& npm i \&\& cd \.\.\/frontend \&\& npm i\r\stop:/g"   \
-        | sed "s/stop:.*ws:/stop:/"   \
+        | sed "s/stop:.*stop:/stop:/"   \
         | tr '\r' '\n' \
         > Makefile
 fi
