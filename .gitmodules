@@ -1,0 +1,3 @@
+[submodule "txrx"]
+	path = txrx
+	url = git@github.com:ZelkZelk/txrx.git
