@@ -64,6 +64,6 @@ then
     project="${PWD##*/}"
     cat txrx/Dockerfile                                                 \
         | sed "s/COPY \.\/ \/usr\/app/COPY \.\/txrx \/usr\/app\n\nCOPY \.\/backend \/usr\/backend/g"  \
-        | sed "s/ENTRYPOINT/RUN ln -s \/usr\/app \/usr\/txrx\n\nRUN cd \/usr\/backend \&\& npm install \&\& rm \-rf \/usr\/backend\/dist \&\& npx tsc\n\nENTRYPOINT/g" \
+        | sed "s/ENTRYPOINT/RUN ln -s \/usr\/app \/usr\/txrx\n\nRUN cd \/usr\/backend \&\& npm link \.\.\/txrx\/rpc \&\& npm install \&\& rm \-rf \/usr\/backend\/dist \&\& npx tsc\n\nENTRYPOINT/g" \
         > Dockerfile
 fi
