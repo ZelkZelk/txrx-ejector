@@ -15,7 +15,22 @@ fi
 
 if [[ ! -d backend ]] ;
 then
+    project="${PWD##*/}"
     cp txrx/backend -R backend
+    cd backend
+    npm install --save ../txrx/rpc
+    npm install --save ../txrx/streamer
+    npm install --save ../txrx/consumer
+
+    cat ../txrx/backend/Makefile                                       \
+        | sed "s/txrx/$project/g"                                      \
+        > Makefile
+
+    cat ../txrx/backend/config/config.json                             \
+        | sed "s/txrx/$project/g"                                      \
+        > config/config.json
+
+    cd ..
 fi
 
 if [[ ! -d frontend ]] ;
@@ -29,7 +44,7 @@ then
     cat txrx/docker-compose.yml                                       \
         | sed "s/txrx/$project/g"                                      \
         | sed "s/HANDLERS_DIR: backend/HANDLERS_DIR: \.\.\/backend/g"   \
-        | sed "s/context: \.\//context: \.\/\n      working_dir: \/txrx/g" > docker-compose.yml
+        > docker-compose.yml
 fi
 
 if [[ ! -f Makefile ]] ;
@@ -42,4 +57,13 @@ then
         | sed "s/ws:.*ws:/ws:/"   \
         | tr '\r' '\n' \
         > Makefile
+fi
+
+if [[ ! -f Dockerfile ]] ;
+then
+    project="${PWD##*/}"
+    cat txrx/Dockerfile                                                 \
+        | sed "s/COPY \.\/ \/usr\/app/COPY \.\/txrx \/usr\/app\n\nCOPY \.\/backend \/usr\/backend/g"  \
+        | sed "s/ENTRYPOINT/RUN ln -s \/usr\/app \/usr\/txrx\n\nRUN cd \/usr\/backend \&\& npm install \&\& rm \-rf \/usr\/backend\/dist \&\& npx tsc\n\nENTRYPOINT/g" \
+        > Dockerfile
 fi
