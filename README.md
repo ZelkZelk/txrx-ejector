@@ -109,6 +109,7 @@ After this you can create, migrate and seed the database:
 
 ```
 cd backend
+npm i
 make db-create
 make migrate
 make db-seed
