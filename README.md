@@ -151,14 +151,14 @@ Attempts to authenticate the `websocket` connection.
 - login klez 12345
 - authorized 1695006160821 87c07ae0-6647-452c-9c68-983245b852f3 ADMIN
 
-### Authorize
+#### Authorize
 
 You can use the `token` received to check the authorization status.
 
 - authorize klez 87c07ae0-6647-452c-9c68-983245b852f3
 - authorized 1695006232254 87c07ae0-6647-452c-9c68-983245b852f3 ADMIN
 
-### Me
+#### Me
 
 Fetches info about the current `authorized` user.
 
@@ -168,12 +168,12 @@ Fetches info about the current `authorized` user.
 
 **Note:** interestingly enough, this endpoint returns a `json` on a new line.
 
-### Logout
+#### Logout
 
 - logout
 - deauthorized
 
-### Me (while not authorized)
+#### Me (while not authorized)
 
 We didn't blunder this out:
 
