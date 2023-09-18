@@ -126,7 +126,7 @@ npm i
 make dev
 ```
 
-Go to [the playground](http://127.0.0.1:3000/playground) and try some basic commands included with the boilerplate `backend`.
+Go to [the playground](http://127.0.0.1:3000/playground) and try some basic commands included within the boilerplate `backend`.
 
 #### Ping
 
@@ -146,7 +146,7 @@ Will respond the actual unix timestamp in milliseconds:
 
 Attempts to authenticate the `websocket` connection.
 
-Note the login command below should authenticate you based on the default database `seeder`.
+**Note:** the login command below should authenticate you based on the default database `seeder`.
 
 - login klez 12345
 - authorized 1695006160821 87c07ae0-6647-452c-9c68-983245b852f3 ADMIN
