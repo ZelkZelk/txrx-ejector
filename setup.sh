@@ -19,6 +19,7 @@ then
     cp txrx/backend -R backend
     cd backend
     npm install --save ../txrx/rpc
+    npm install --save ../txrx/redis
     npm install --save ../txrx/streamer
     npm install --save ../txrx/consumer
 
