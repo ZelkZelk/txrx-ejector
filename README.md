@@ -11,7 +11,7 @@ Most of this was developed/tested using `Ubuntu 22.04.3 LTS`, however is not str
 You're still going to need:
 
 - git
-- docker
+- docker engine
 - npm
 - basic programs that an `unix-like` environment should bring: cp, cat, sed, tr, rm.
 
