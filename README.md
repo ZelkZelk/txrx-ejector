@@ -88,13 +88,12 @@ Enters a lone `dispatcher` into the game.
 make dispatcher
 ```
 
-### RPC
+### Tracing
 
-The `ejected` setup brings two `rpc` services, one `general` and also the `auth` rpc.
+The `ejected` setup brings the OTel Collector out of the box along with Jaeger for tracing.
 
 ```
-make rpc
-make rpc-auth
+make telemetry
 ```
 
 ### Database
@@ -112,6 +111,20 @@ cd backend
 npm i
 make bootstrap
 ```
+### RPC
+
+The `ejected` setup brings two `rpc` services, one `general` and also the `auth` rpc.
+
+Since the `backend` code should typically be mounted on `dev` environments, you will have to transpile.
+
+```
+make node_install
+make tsc
+make rpc
+make rpc-auth
+```
+
+Note if you some `typescript` errors here, you can ignore them.
 
 ### Playground
 

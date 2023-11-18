@@ -8,10 +8,10 @@ then
     git submodule update
 fi
 
-if [[ "$origin" == "git@github.com:ZelkZelk/txrx-example.git" ]] ;
-then
-    git remote rm origin
-fi
+# if [[ "$origin" == "git@github.com:ZelkZelk/txrx-example.git" ]] ;
+# then
+#     git remote rm origin
+# fi
 
 if [[ ! -d backend ]] ;
 then
@@ -44,20 +44,28 @@ then
     project="${PWD##*/}"
     cat txrx/docker-compose.yml                                       \
         | sed "s/txrx/$project/g"                                      \
-        | sed "s/HANDLERS_DIR: backend/HANDLERS_DIR: \.\.\/backend/g"   \
+        | sed "s/\.\/telemetry/\.\/txrx\/telemetry/g"                   \
+        | sed "s/HANDLERS_DIR: backend/HANDLERS_DIR: \.\.\/backend/g"    \
         > docker-compose.yml
+fi
+
+if [[ ! -f "docker-compose.dev.yml" ]] ;
+then
+    project="${PWD##*/}"
+    cat txrx/docker-compose.dev.yml | grep version > docker-compose.dev.yml
+    echo -e "\nservices:" >> docker-compose.dev.yml
+    echo -e "  rpc:" >> docker-compose.dev.yml
+    echo -e "    volumes:" >> docker-compose.dev.yml
+    echo -e "      - ./backend:/usr/backend" >> docker-compose.dev.yml
+    echo -e "  rpc-auth:" >> docker-compose.dev.yml
+    echo -e "    volumes:" >> docker-compose.dev.yml
+    echo -e "      - ./backend:/usr/backend" >> docker-compose.dev.yml
 fi
 
 if [[ ! -f Makefile ]] ;
 then
     project="${PWD##*/}"
-    cat txrx/Makefile                                                 \
-        | sed "s/txrx/$project/g"                                      \
-        | tr '\n' '\r'                                                  \
-        | sed "s/node_clean:/node_clean:\r\trm -rf backend\/dist backend\/node_modules frontend\/dist frontend\/node_modules\r\tcd backend \&\& npm i \&\& cd \.\.\/frontend \&\& npm i\r\r\stop:/g"   \
-        | sed "s/stop:.*stop:/stop:/"   \
-        | tr '\r' '\n' \
-        > Makefile
+    cat txrx/Makefile | sed "s/txrx/$project/g" > Makefile
 fi
 
 if [[ ! -f Dockerfile ]] ;
