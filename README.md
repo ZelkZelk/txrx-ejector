@@ -118,13 +118,15 @@ The `ejected` setup brings two `rpc` services, one `general` and also the `auth`
 Since the `backend` code should typically be mounted on `dev` environments, you will have to transpile.
 
 ```
+cd txrx 
+make node_install
+make tsc
+cd ..
 make node_install
 make tsc
 make rpc
 make rpc-auth
 ```
-
-Note if you some `typescript` errors here, you can ignore them.
 
 ### Playground
 

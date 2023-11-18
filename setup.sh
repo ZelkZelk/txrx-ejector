@@ -8,10 +8,10 @@ then
     git submodule update
 fi
 
-# if [[ "$origin" == "git@github.com:ZelkZelk/txrx-example.git" ]] ;
-# then
-#     git remote rm origin
-# fi
+if [[ "$origin" == "git@github.com:ZelkZelk/txrx-example.git" ]] ;
+then
+    git remote rm origin
+fi
 
 if [[ ! -d backend ]] ;
 then
@@ -57,6 +57,7 @@ then
     echo -e "  rpc:" >> docker-compose.dev.yml
     echo -e "    volumes:" >> docker-compose.dev.yml
     echo -e "      - ./backend:/usr/backend" >> docker-compose.dev.yml
+    echo -e "services:" >> docker-compose.dev.yml
     echo -e "  rpc-auth:" >> docker-compose.dev.yml
     echo -e "    volumes:" >> docker-compose.dev.yml
     echo -e "      - ./backend:/usr/backend" >> docker-compose.dev.yml
@@ -76,3 +77,5 @@ then
         | sed "s/ENTRYPOINT/RUN ln -s \/usr\/app \/usr\/txrx\n\nRUN if [ \"\${PACKAGE}\" = 'rpc' ] ; then cd \/usr\/backend \&\& npm link \.\.\/txrx\/rpc \&\& npm install \&\& rm \-rf \/usr\/backend\/dist \&\& npx tsc; fi\n\nENTRYPOINT/g" \
         > Dockerfile
 fi 
+
+rm setup.sh
