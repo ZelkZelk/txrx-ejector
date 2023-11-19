@@ -57,7 +57,6 @@ then
     echo -e "  rpc:" >> docker-compose.dev.yml
     echo -e "    volumes:" >> docker-compose.dev.yml
     echo -e "      - ./backend:/usr/backend" >> docker-compose.dev.yml
-    echo -e "services:" >> docker-compose.dev.yml
     echo -e "  rpc-auth:" >> docker-compose.dev.yml
     echo -e "    volumes:" >> docker-compose.dev.yml
     echo -e "      - ./backend:/usr/backend" >> docker-compose.dev.yml
