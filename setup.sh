@@ -77,4 +77,9 @@ then
         > Dockerfile
 fi 
 
+if [[ ! -f nodemon.json ]]
+then
+    cat txrx/nodemon.json | sed "s/make reload/make rpc \&\& make rpc\-auth/g" > nodemon.json
+fi
+
 rm setup.sh
