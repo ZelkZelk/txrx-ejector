@@ -73,7 +73,7 @@ fi
 if [[ ! -f Makefile ]] ;
 then
     project="${PWD##*/}"
-    cat txrx/Makefile | sed "s/cd txrx/cd ZZZZZ/g" | sed "s/txrx/$project/g" | sed "s/cd ZZZZZ/cd txrx/g" > Makefile
+    cat txrx/Makefile | sed "s/\-d \"txrx\"/\-d \"\ZZZZZ\"/g" | sed "s/cd txrx/cd ZZZZZ/g" | sed "s/txrx/$project/g" | sed "s/ZZZZZ/txrx/g" > Makefile
 fi
 
 if [[ ! -f Dockerfile ]] ;
