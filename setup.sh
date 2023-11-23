@@ -44,9 +44,17 @@ then
     project="${PWD##*/}"
     cat txrx/docker-compose.yml                                       \
         | sed "s/txrx/$project/g"                                      \
-        | sed "s/\.\/telemetry/\.\/txrx\/telemetry/g"                   \
+        | sed "s/\.\/telemetry/\./g"                                    \
         | sed "s/HANDLERS_DIR: backend/HANDLERS_DIR: \.\.\/backend/g"    \
         > docker-compose.yml
+fi
+
+if [[ ! -d "otelcol" ]] ;
+then
+    project="${PWD##*/}"
+    cp -R txrx/telemetry/otelcol otelcol
+
+    cat txrx/telemetry/otelcol/otelcol-observability.yml | sed "s/txrx/$project/g" > otelcol/otelcol-observability.yml
 fi
 
 if [[ ! -f "docker-compose.dev.yml" ]] ;
@@ -65,7 +73,7 @@ fi
 if [[ ! -f Makefile ]] ;
 then
     project="${PWD##*/}"
-    cat txrx/Makefile | sed "s/txrx/$project/g" > Makefile
+    cat txrx/Makefile | sed "s/cd txrx/cd ZZZZZ/g" | sed "s/txrx/$project/g" | sed "s/cd ZZZZZ/cd txrx/g" > Makefile
 fi
 
 if [[ ! -f Dockerfile ]] ;

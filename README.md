@@ -92,6 +92,8 @@ make dispatcher
 
 The `ejected` setup brings the OTel Collector out of the box along with Jaeger for tracing.
 
+The container configuration is also ejected into the `/otelcol` directory.
+
 ```
 make telemetry
 ```
@@ -118,12 +120,6 @@ The `ejected` setup brings two `rpc` services, one `general` and also the `auth`
 Since the `backend` code should typically be mounted on `dev` environments, you will have to transpile.
 
 ```
-cd txrx 
-make node_install
-make tsc
-cd ..
-make node_install
-make tsc
 make rpc
 make rpc-auth
 ```
