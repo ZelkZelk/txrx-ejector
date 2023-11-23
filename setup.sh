@@ -87,5 +87,5 @@ fi
 
 if [[ ! -f nodemon.json ]]
 then
-    cat txrx/nodemon.json | sed "s/make reload/make rpc \&\& make rpc\-auth/g" > nodemon.json
+    cat txrx/nodemon.json | sed "s/make reload/make rpc_restart \&\& make rpc\-auth_restart/g" > nodemon.json
 fi
